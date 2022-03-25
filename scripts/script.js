@@ -11,15 +11,12 @@ const Storage = {
         Object.keys(obj).forEach((item) => {
             localStorage.setItem(`${item}`, JSON.stringify(obj[item])) 
         })
-    },
-
-      
+    },      
 
     get(list) {
         return JSON.parse(localStorage.getItem(list)) || [];
     }
 }
-
 
 const Category = {
     showCategory(category) {
@@ -169,6 +166,3 @@ const Form = {
         }
     }    
 }
-
-
-
