@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>To-You</title>
+</head>
+<body>
+    <header>
+        <h1>To-You</h1>
+    </header>
+
+    <section class="categories">
+        <ul class="categories-list">
+            <li class="category" id="category-work" onclick="Category.showCategory(id)">
+                <img src="./images/work.svg" alt="Categoria trabalho">
+                <p>Trabalho</p>
+            </li>
+
+            <li class="category" id="category-health" onclick="Category.showCategory(id)">
+                <img src="./images/health.svg" alt="Categoria saúde">
+                <p>Saúde</p>
+            </li>
+
+            <li class="category" id="category-personal" onclick="Category.showCategory(id)">
+                <img  src="./images/personal.svg" alt="Categoria pessoal">
+                <p>Pessoal</p>
+            </li>
+            <li class="category" id="category-shopping" onclick="Category.showCategory(id)">
+                <img src="./images/shopping.svg" alt="Categoria mercado">
+                <p>Mercado</p>
+            </li>
+        </ul>
+    </section>
+
+    <main>
+        <ul class="task-list">
+        </ul>
+    </main>
+
+    <section class="modal-overlay">
+        <form action="" onsubmit="Form.submit(event)" id="form">
+            <img src="./images/exit.svg" alt="Cancelar" onclick="Modal.toggle()">
+
+            <fieldset>
+                <legend>Nova Tarefa</legend>
+
+                <label for="description-input" class="screen-readers-only">Descrição</label>
+                <input type="text" maxlength="20" placeholder="Descrição" id="description-input" required>
+
+                <label for="time-input" class="screen-readers-only">Horário da tarefa</label>
+                <input type="time" id="time-input">
+
+                <label for="categories-select" class="screen-readers-only">Selecione a categoria</label>
+                <select name="category" id="categories-select">
+                    <optgroup label="Categoria">
+                        <option value="work">Trabalho</option>
+                        <option value="health">Saúde</option>
+                        <option value="personal">Pessoal</option>
+                        <option value="shopping">Mercado</option>
+                    </optgroup>
+                </select>
+            </fieldset>
+
+            <button id="save">Adicionar</button>
+        </form>               
+    </section>
+    
+    <footer><button id="button-add">
+        <img src="./images/button.svg" alt="Adicionar nova tarefa" onclick="Modal.toggle()">
+    </button></footer>
+    
+
+    
+    
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>

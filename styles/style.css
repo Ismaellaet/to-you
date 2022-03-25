@@ -1,0 +1,340 @@
+/* Variables */
+:root {
+    --background: #f0f2f5;
+    --text-color: #636265;
+    --text-task: #64D6AA;
+}
+
+/* Globals */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    background: var(--background);
+    font-family: 'Nunito', sans-serif;
+}
+
+.screen-readers-only {
+    position: absolute;
+    width: 1px; 
+    height: 1px;
+    
+    padding: 0;
+    margin: -1px;
+    
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+/* Header */
+header {
+    min-height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin: auto;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+header img {
+    position: absolute;
+    margin: 2rem 1rem;
+    right: 0;
+    top: 0;
+}
+
+/* Categories*/
+.categories {
+    background: #f7f7f7;
+    border-radius: 2rem;
+    margin: 1rem;
+    padding: 2rem;
+}
+
+/* Category List*/
+.categories-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.category.active img{
+    background-color: #B8E4D4;
+    border-radius: 1.2rem;
+}
+
+.category.active p {
+    color: #22B07E;
+}
+/* Task List */
+.task-list {
+    list-style: none;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #f7f7f7;
+
+    margin: 3rem 1rem;
+    padding: 2rem;
+    border-radius: 2rem;
+
+    cursor: pointer;
+}
+
+.task:hover {
+    background: white;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    position: relative;
+    padding-left: 3rem;
+}
+
+.task-text {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+}
+
+.description {
+    margin-left: 1rem;
+    font-weight: 700;
+}
+
+.time {
+    color: var(--text-task);
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    position: absolute;
+    right: 1rem;
+}
+
+/* Check Box*/
+/* Hide the browser's default checkbox*/
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox*/
+.checkmark {
+    position: absolute;
+    top: 2rem;
+    left: 1rem;
+    cursor: pointer;
+
+    height: 1.8rem;
+    width: 1.8rem;
+    border: 2px solid var(--text-task);
+    border-radius: 2rem;
+}
+
+/* On mouse-over, upscale */
+.task:hover input ~ .checkmark {
+    transform: scale(1.1);
+}
+
+/* When the checkbox is checked */
+.task input:checked ~ .checkmark {
+    background-color: var(--text-task);
+}
+
+.task input:checked ~ .description {
+    text-decoration: line-through var(--text-task) 0.2rem;
+}
+
+/* Create the chekmark (hidden when note checked) */
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.task input:checked ~ .checkmark::after {
+    display: block;
+}
+
+/* Style the checkmark */
+.task .checkmark::after {
+    bottom: 0.5rem;
+    left: 0.7rem;
+    width: 0.5rem;
+    height: 1.2rem;
+    border: 1px solid var(--text-color);
+    border-width: 0 0.3rem 0.3rem 0;
+    transform: rotate(45deg);
+}
+
+/* Footer Add Button */
+footer {
+    height: 100%;
+    display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+#button-add {
+    border: none;
+    position: absolute;
+    bottom: 10rem;
+    border-radius: 4rem;
+}
+
+ #button-add::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--text-task);
+    border-radius: 50%;
+    animation: ripple 2s ease-out infinite;
+    z-index: -1;
+}
+
+@keyframes ripple {
+    from {
+        opacity: 1;
+        transform: scale(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.7);
+    }
+}
+
+/* Modal */
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0,0,0,0.7);
+
+    position: fixed;
+    top: 0;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Form */
+form {
+    max-width: 30rem;
+    margin: 1rem auto;
+    padding: 1rem 2rem;
+    background: #f7f7f7;
+
+    border: 1px solid #B8E4D4;
+    border-radius: 1rem;
+    
+    color: var(--text-color);
+}
+
+form img {
+    display: block;
+    
+    
+}
+input,
+select {
+    background-color: #e8eeef;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+
+    border: none;
+    border-radius: 0.25rem;
+
+    font-size: 1.6rem;
+    height: 1rem;
+    width: 100%;
+
+    margin: 0;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    outline: 0;
+}
+
+select {
+    padding: .6rem;
+    height: auto;
+    border-radius: .2rem;
+}
+
+fieldset {
+    border: none;
+}
+
+legend {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+#save {        
+        color: #FFF;
+        background-color: #4bc970;
+        box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+
+        font-size: 1.8rem;        
+        width: 100%;
+        
+        border: none;
+        border-radius: 5px;
+        
+        
+        margin-bottom: 10px;
+        padding: 2rem 4rem;      
+}
