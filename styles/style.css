@@ -1,8 +1,10 @@
 /* Variables */
 :root {
     --background: #f0f2f5;
+    --secundary-background: #f7f7f7;
     --text-color: #636265;
     --text-task: #64D6AA;
+    --border: #B8E4D4;
 }
 
 /* Globals */
@@ -49,16 +51,9 @@ header h1 {
     font-weight: 700;
 }
 
-header img {
-    position: absolute;
-    margin: 2rem 1rem;
-    right: 0;
-    top: 0;
-}
-
 /* Categories*/
 .categories {
-    background: #f7f7f7;
+    background: var(--secundary-background);
     border-radius: 2rem;
     margin: 1rem;
     padding: 2rem;
@@ -69,7 +64,6 @@ header img {
     list-style: none;
     display: flex;
     justify-content: space-around;
-    
 }
 
 .category {
@@ -84,8 +78,8 @@ header img {
 }
 
 .category.active img{
-    background-color: #B8E4D4;
-    border-radius: 1.2rem;
+    background-color: var(--border);
+    border-radius: 2rem;
 }
 
 .category.active p {
@@ -94,24 +88,8 @@ header img {
 /* Task List */
 .task-list {
     list-style: none;
-}
-
-.task {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: #f7f7f7;
-
-    margin: 3rem 1rem;
-    padding: 2rem;
-    border-radius: 2rem;
-
-    cursor: pointer;
-}
-
-.task:hover {
-    background: white;
+    height: 45rem;
+    overflow-y: scroll;
 }
 
 .task {
@@ -120,8 +98,18 @@ header img {
     justify-content: space-between;
     gap: 1rem;
 
+    background: var(--secundary-background);
+
+    margin: 3rem 1rem;
+    padding: 2rem 3rem;
+    border-radius: 2rem;
+
     position: relative;
-    padding-left: 3rem;
+    cursor: pointer;
+}
+
+.task:hover {
+    background: white;
 }
 
 .task-text {
@@ -220,6 +208,7 @@ footer {
     position: absolute;
     bottom: 10rem;
     border-radius: 4rem;
+    cursor: pointer;
 }
 
  #button-add::before {
@@ -231,6 +220,10 @@ footer {
     border-radius: 50%;
     animation: ripple 2s ease-out infinite;
     z-index: -1;
+}
+
+#button-add img {
+    width: 7rem;
 }
 
 @keyframes ripple {
@@ -272,12 +265,12 @@ footer {
 
 /* Form */
 form {
-    max-width: 30rem;
+    width: 30rem;
     margin: 1rem auto;
     padding: 1rem 2rem;
-    background: #f7f7f7;
+    background: var(--secundary-background);
 
-    border: 1px solid #B8E4D4;
+    border: 1px solid var(--border);
     border-radius: 1rem;
     
     color: var(--text-color);
@@ -285,13 +278,12 @@ form {
 
 form img {
     display: block;
-    
-    
 }
+
 input,
 select {
     background-color: #e8eeef;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 .1rem 0 rgba(0,0,0,0.03) inset;
 
     border: none;
     border-radius: 0.25rem;
@@ -324,7 +316,7 @@ legend {
 }
 
 #save {        
-        color: #FFF;
+        color: white;
         background-color: #4bc970;
         box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
 

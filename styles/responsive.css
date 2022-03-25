@@ -1,0 +1,103 @@
+/* Header */
+header {
+    height: 10rem;
+}
+
+header h1 {
+    font-size: 6rem;
+}
+
+/* Categories */
+.categories {
+    padding: 3rem;
+}
+
+.category img {
+    width: 6rem;
+}
+
+.category p {
+    font-size: 2rem;
+}
+
+/* Tasks */
+.task-list {
+    height: 40rem;
+}
+
+.task {
+    padding: 2rem;
+}
+
+.task-text {
+    font-size: 2rem;
+}
+
+.description {
+    margin-left: 4rem;
+}
+
+.time {
+    right: 10rem;
+    font-size: 2rem;
+}
+
+/* CheckBox */
+.checkmark {
+    height: 2.3rem;
+    width: 2.3rem;
+
+    top: 2rem;
+    left: 1rem;
+}
+
+.task input:checked ~ .description {
+    text-decoration: line-through var(--text-task) 0.3rem;
+}
+
+.task .checkmark::after {
+    bottom: .8rem;
+    left: 1rem;
+    width: .8rem;
+    height: 1.8rem;
+    border: 0.2rem solid var(--text-color);
+    border-width: 0 .3rem .3rem 0;
+    
+}
+
+/* Footer Add Button */
+#button-add {
+    bottom: 3rem;
+}
+#button-add img {
+    width: 10rem;
+}
+
+/* Form */
+form {
+    width: 60rem;
+    margin: 2rem auto;
+    padding: 2rem 4rem;
+    border: .4rem solid var(--border);
+}
+
+form img {
+    width: 4rem;
+}
+
+input,
+select {
+    font-size: 2rem;
+    height: 6rem;
+    
+}
+
+legend {
+    font-size: 4rem;
+    margin-bottom: 4rem;
+}
+
+#save {
+    font-size: 3rem;
+}
+
