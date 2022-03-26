@@ -7,19 +7,16 @@ const Modal = {
 }
 
 const Storage = {
-    set(obj) {
-        Object.keys(obj).forEach((item) => {
-            localStorage.setItem(`${item}`, JSON.stringify(obj[item])) 
+    set(lists) {
+        Object.keys(lists).forEach((list) => {
+            localStorage.setItem(`${list}`, JSON.stringify(lists[list])) 
         })
-    },
-
-      
+    },      
 
     get(list) {
         return JSON.parse(localStorage.getItem(list)) || [];
     }
 }
-
 
 const Category = {
     showCategory(category) {
@@ -169,6 +166,3 @@ const Form = {
         }
     }    
 }
-
-
-

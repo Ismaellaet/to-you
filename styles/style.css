@@ -38,7 +38,7 @@ body {
 }
 /* Header */
 header {
-    min-height: 7rem;
+    height: 8vh;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -46,9 +46,9 @@ header {
 
 header h1 {
     font-size: 3rem;
+    font-weight: 700;
     margin: auto;
     color: var(--text-color);
-    font-weight: 700;
 }
 
 /* Categories*/
@@ -79,65 +79,79 @@ header h1 {
 
 .category.active img{
     background-color: var(--border);
-    border-radius: 2rem;
+    border-radius: 1rem;
 }
 
 .category.active p {
     color: #22B07E;
 }
+
 /* Task List */
-.task-list {
-    list-style: none;
-    height: 45rem;
-    overflow-y: scroll;
+.container {
+    width: 100%;
+    max-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.content {
+    width: 100%;
+    max-width: 72rem;
+    display: flex;
+    align-items: center;
+    margin: 0 auto 1rem 1rem
 }
 
 .task {
+    min-width: 85%;
+    border-radius: 1rem;
+
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--secundary-background);
+}
+
+.description-check {
+    width: 100%;
+    display: flex;
+    align-items: center;
     gap: 1rem;
 
-    background: var(--secundary-background);
-
-    margin: 3rem 1rem;
-    padding: 2rem 3rem;
-    border-radius: 2rem;
-
     position: relative;
-    cursor: pointer;
-}
-
-.task:hover {
-    background: white;
-}
-
-.task-text {
-    color: var(--text-color);
-    font-size: 1.5rem;
-    font-weight: 500;
-
-    display: flex;
-    align-items: center;
 }
 
 .description {
-    margin-left: 1rem;
+    
+    font-size: 1.6rem;
     font-weight: 700;
+    color: var(--text-color);
 }
 
 .time {
+    font-size: 1.6rem;
+    font-weight: 500;
     color: var(--text-task);
-    font-size: 1.2rem;
-    font-weight: 700;
+}
 
-    position: absolute;
-    right: 1rem;
+.cancel {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Check Box*/
-/* Hide the browser's default checkbox*/
-input[type="checkbox"] {
+.check {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+}
+/* => Hide the browser's default checkbox */
+.description-check input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -145,46 +159,42 @@ input[type="checkbox"] {
     width: 0;
 }
 
-/* Create a custom checkbox*/
+/* => Create a custom checkbox */
 .checkmark {
-    position: absolute;
-    top: 2rem;
-    left: 1rem;
-    cursor: pointer;
-
+    top: 0;
+    left: 0;
     height: 1.8rem;
     width: 1.8rem;
-    border: 2px solid var(--text-task);
+    border: 1px solid var(--border);
     border-radius: 2rem;
 }
-
-/* On mouse-over, upscale */
+/* => On mouse-over, scaleup */ 
 .task:hover input ~ .checkmark {
     transform: scale(1.1);
 }
 
-/* When the checkbox is checked */
+/* => When the checkbox is checked */
 .task input:checked ~ .checkmark {
     background-color: var(--text-task);
 }
 
 .task input:checked ~ .description {
-    text-decoration: line-through var(--text-task) 0.2rem;
+    text-decoration: line-through 2px var(--text-task);    
 }
 
-/* Create the chekmark (hidden when note checked) */
-.checkmark::after {
+/* => Create the checkmark (hidden when not checked) */
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-/* Show the checkmark when checked */
+/* => Show the checkmark when checked */
 .task input:checked ~ .checkmark::after {
     display: block;
 }
 
-/* Style the checkmark */
+/* => Style the checkmark */
 .task .checkmark::after {
     bottom: 0.5rem;
     left: 0.7rem;
@@ -329,4 +339,10 @@ legend {
         
         margin-bottom: 10px;
         padding: 2rem 4rem;      
+}
+
+@media (max-width:319px) {
+    .category p {
+        display: none;
+    }
 }

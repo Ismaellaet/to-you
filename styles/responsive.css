@@ -20,6 +20,10 @@ header h1 {
     font-size: 2rem;
 }
 
+.category.active img{
+    border-radius: 2rem;
+}
+
 /* Tasks */
 .task-list {
     height: 40rem;
