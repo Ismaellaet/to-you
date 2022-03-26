@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/responsive.css" media="screen and (min-width: 1024px)">
+    <link rel="stylesheet" href="./styles/responsive.css" media="screen and (min-width: 768px)">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap" rel="stylesheet">
@@ -19,30 +19,28 @@
 
     <section class="categories">
         <ul class="categories-list">
-            <li class="category" id="category-work" onclick="Category.showCategory(id)">
+            <li class="category" id="category-work" onclick="Category.show(id)">
                 <img src="./images/work.svg" alt="Categoria trabalho">
                 <p>Trabalho</p>
             </li>
 
-            <li class="category" id="category-health" onclick="Category.showCategory(id)">
+            <li class="category" id="category-health" onclick="Category.show(id)">
                 <img src="./images/health.svg" alt="Categoria saúde">
                 <p>Saúde</p>
             </li>
 
-            <li class="category" id="category-personal" onclick="Category.showCategory(id)">
+            <li class="category" id="category-personal" onclick="Category.show(id)">
                 <img  src="./images/personal.svg" alt="Categoria pessoal">
                 <p>Pessoal</p>
             </li>
-            <li class="category" id="category-shopping" onclick="Category.showCategory(id)">
+            <li class="category" id="category-shopping" onclick="Category.show(id)">
                 <img src="./images/shopping.svg" alt="Categoria mercado">
                 <p>Mercado</p>
             </li>
         </ul>
     </section>
 
-    <main class="container">
-
-        </div>
+    <main class="task-list">
     </main>
 
     <section class="modal-overlay">

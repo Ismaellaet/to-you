@@ -19,7 +19,7 @@ const Storage = {
 }
 
 const Category = {
-    showCategory(category) {
+    show(category) {
         const list = List.get(category);
 
         Category.active(category);
@@ -29,7 +29,8 @@ const Category = {
             
             DOM.addTask(task, index);
             DOM.checkTask(task, index);
-            DOM.eventCheck(task, index);   
+            DOM.eventCheck(task, index);  
+            List.remove(list, index, category)
             Storage.set(List.all)   
         })
     },
@@ -48,7 +49,7 @@ const Category = {
     }
 }
 
-const List ={
+const List = {
     all: {
         workList: Storage.get('workList'),
 
@@ -81,35 +82,49 @@ const List ={
     },
 
     clear() {
-        DOM.unorderedList.innerHTML = "";
+        DOM.taskList.innerHTML = "";
     },
 
     insert(task, category) {
         List.get(category).push(task);
         
-        Category.showCategory(category);
+        Category.show(category);
+    },
+
+    remove(list, index, category) {
+        const element = document.querySelector(`#cancel${index}`);
+
+        element.addEventListener('click', () => {
+            list.splice(index, 1);
+            Category.show(category);
+            Storage.set(List.all)
+        })
     }
 }
 
 const DOM = {
-    unorderedList: document.querySelector(".task-list"),
-
+    taskList: document.querySelector('.task-list'),
     addTask(task, index) {
-        const li = document.createElement('li');
-        li.classList.add('task');
-        
-        li.innerHTML = DOM.htmlTask(task, index);
-        DOM.unorderedList.appendChild(li)
-    },
+        const divContent = document.createElement('div');
+        divContent.classList.add('content');
 
+        divContent.innerHTML = DOM.htmlTask(task, index);
+        DOM.taskList.appendChild(divContent);
+    },
+    
     htmlTask(task, index) {
-        const html = `<label for="task${index}" class="task-text" >
+        const html = `<label class="task">
+        <div class="description-check">
             <input type="checkbox" id="task${index}">
             <span class="checkmark"></span>
-    
+            
             <span class="description">${task.description}</span>
-            <span class="time">${task.time}</span>
-        </label>`
+        </div>
+        
+        <span class="time">${task.time}</span>
+    </label>
+
+    <img src="./images/trash.svg" alt="Cancelar task" class="cancel" id="cancel${index}">`
     
         return html;
     },
@@ -124,12 +139,11 @@ const DOM = {
         const element = document.querySelector(`#task${index}`);
 
         element.addEventListener('click', () => {
-
-            task.checked = !task.checked
+            task.checked = !task.checked;
             DOM.checkTask(task, index);
-            Storage.set(List.all)
+            Storage.set(List.all);
         })       
-    }
+    },
 }
 
 const Form = {
@@ -149,7 +163,7 @@ const Form = {
     clearFields() {
         Form.description.value = "";
         Form.time.value = "";
-        Form.category.value = "";
+        Form.category.value = "category-work";
     },
     
     submit(event) {

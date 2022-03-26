@@ -24,32 +24,38 @@ header h1 {
     border-radius: 2rem;
 }
 
-/* Tasks */
+/* Task-list */
 .task-list {
-    height: 40rem;
+    max-height: 45vh;
+}
+
+.content {
+    margin: 2rem auto;
+    width: 70%;
+    gap: 2rem;
 }
 
 .task {
-    padding: 2rem;
-}
-
-.task-text {
-    font-size: 2rem;
+    padding: 3rem;
+    
 }
 
 .description {
-    margin-left: 4rem;
+    font-size: 2.5rem;
 }
 
 .time {
-    right: 10rem;
-    font-size: 2rem;
+    font-size: 2.5rem;
+}
+
+.cancel {
+    width: 4rem;
 }
 
 /* CheckBox */
 .checkmark {
-    height: 2.3rem;
-    width: 2.3rem;
+    height: 3rem;
+    width: 3rem;
 
     top: 2rem;
     left: 1rem;
@@ -60,12 +66,12 @@ header h1 {
 }
 
 .task .checkmark::after {
-    bottom: .8rem;
-    left: 1rem;
+    bottom: 1.2rem;
+    left: 1.2rem;
     width: .8rem;
     height: 1.8rem;
-    border: 0.2rem solid var(--text-color);
-    border-width: 0 .3rem .3rem 0;
+    border: 0.4rem solid var(--text-color);
+    border-width: 0 .4rem .4rem 0;
     
 }
 
