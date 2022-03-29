@@ -15,8 +15,11 @@ To-You é um estilo de To-Do list, ou seja, uma lista de tarefas que precisam se
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Edição de uma tarefa já criada
-- [ ] Opção de criar mais categorias
+- [ ] Edição de uma tarefa já criada.
+- [ ] Opção de criar mais categorias.
+- [ ] Adicionar um filtro para visualizar todas as categorias.
+- [ ] Salvar os dados em um banco de dados ao invés de usar o localStorage. Criar uma conta free na AWS e usar algum banco de dados no FREE TIER é uma boa opção.
+- [ ] Adicionar efeito hover para os ícones das categorias.
 
 ## 🚀 Instalando To you
 
