@@ -19,11 +19,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Opção de criar mais categorias.
 - [ ] Adicionar um filtro para visualizar todas as categorias.
 - [ ] Salvar os dados em um banco de dados ao invés de usar o localStorage. Criar uma conta free na AWS e usar algum banco de dados no FREE TIER é uma boa opção.
-<<<<<<< HEAD
 - [x] Adicionar efeito hover para os ícones das categorias.
-=======
-- [ ] Adicionar efeito hover para os ícones das categorias.
->>>>>>> 24e52cca0f0fa5865b2f261c151ccb179554ab09
 
 ## 🚀 Instalando To you
 
