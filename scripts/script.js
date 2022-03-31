@@ -2,52 +2,51 @@ const Modal = {
     overlay: document.querySelector(".modal-overlay"),
 
     toggle() {
-        Modal.overlay.classList.toggle('active');
+        Modal.overlay.classList.toggle('active'); // Toggle class active
     }
-}
+};
 
 const Storage = {
-    set(lists) {
-        Object.keys(lists).forEach((list) => {
-            localStorage.setItem(`${list}`, JSON.stringify(lists[list])) 
+    set() { // Set all lists on Local Storage
+        Object.keys(List.all).forEach((list) => {
+            localStorage.setItem(`${list}`, JSON.stringify(List.all[list])) 
         })
     },      
 
-    get(list) {
+    get(list) { // Get list on Local Storage
         return JSON.parse(localStorage.getItem(list)) || [];
     }
-}
+};
 
 const Category = {
-    show(category) {
-        const list = List.get(category);
+    collection: document.getElementsByClassName('category'), // HTML Collection of categories
 
-        Category.active(category);
-        List.clear();
+    selected: null, // Store the currently selected category
 
-        list.forEach((task, index) => {
-            
-            DOM.addTask(task, index);
-            DOM.checkTask(task, index);
-            DOM.eventCheck(task, index);  
-            List.remove(list, index, category)
-            Storage.set(List.all)   
-        })
+    addEvent() { // Add event to each category
+        for(const category of Category.collection) {
+            category.addEventListener('click', () => {
+                Category.selected = category.getAttribute('value');
+
+                Category.addClassActive();
+
+                List.show();
+            })
+        }
     },
 
-    active(category) {
-        Category.removeActive();
+    addClassActive() { // Add class 'active' on category
+        Category.removeClass();
 
-        document.querySelector(`#${category}`).classList.add('active');
+        document.querySelector(`[value="${Category.selected}"]`).classList.add('active');
     },
 
-    removeActive() {
-        const categories = document.querySelector('.categories-list').children
-       for(index = 0; index < categories.length; index++) {
-           categories[index].classList.remove('active')
-       } 
+    removeClass() { // Remove class 'active' of all collection
+        for(index = 0; index < Category.collection.length; index++) {
+           Category.collection[index].classList.remove('active')
+        } 
     }
-}
+};
 
 const List = {
     all: {
@@ -60,60 +59,99 @@ const List = {
         shoppingList: Storage.get('shoppingList')
     },
 
-    get(category) {
-        let list;
-        
-        switch(category) {
-            case 'category-work':
-                list = List.all.workList;
-                break;        
-            case 'category-health':
-                list = List.all.healthList;
-                break;        
-            case 'category-personal':
-                list = List.all.personalList;
-                break;        
-            case 'category-shopping':
-                list = List.all.shoppingList;
-                break;        
-        }
+    get(category) { // Get list of category (parameter) 
+        const categoryWork = category === 'work';
+        const categoryHealth = category === 'health';
+        const categoryPersonal = category === 'personal';
+        const categoryShopping = category === 'shopping';
 
-        return list;
+        if(categoryWork) {
+            return List.all.workList;
+        } else if(categoryHealth) {
+            return List.all.healthList;
+        } else if(categoryPersonal) {
+            return List.all.personalList;
+        } else if(categoryShopping) {
+            return List.all.shoppingList;
+        } else {
+            throw new Error('Categoria não encontrada!')
+        }
+    },
+
+    show() { // Show list of category selected
+        const list = List.get(Category.selected);
+
+        List.clear();
+
+        list.forEach(DOM.addTask);
+
+        Task.ifExists();
+
+        DOM.toggleAttributeIfChecked();
+
+        Task.addEvent(); 
+
+        Storage.set();
     },
 
     clear() {
         DOM.taskList.innerHTML = "";
     },
+};
 
-    insert(task, category) {
-        List.get(category).push(task);
-        
-        Category.show(category);
+const Task = {
+    collection: document.getElementsByClassName('task'), // HTML Collection of tasks
+
+    ifExists() { // Check if exist any task in category selected
+        if(Task.collection != []) {
+            Task.addEvent()
+        }
     },
 
-    remove(list, index, category) {
-        const element = document.querySelector(`#cancel${index}`);
+    addEvent() { // Add event to each task
+        for(const task of Task.collection) {
+            task.addEventListener('change', () => {
+                Task.toggleCheckedProperty(task);
+            })
+        }
+    },
 
-        element.addEventListener('click', () => {
-            list.splice(index, 1);
-            Category.show(category);
-            Storage.set(List.all)
-        })
+    toggleCheckedProperty(task) {
+        const input = document.querySelector(`#${task.htmlFor}`); // Getting label's input through the attribute 'for'
+        const taskIndex = task.dataset.index;
+        const list = List.get(Category.selected);
+
+        // Check if input is checked or not
+        if(input.checked) {
+            list[taskIndex].checked = true; 
+        } else {
+            list[taskIndex].checked = false;
+        }
+
+        Storage.set();   
+    },
+
+    remove(index) { // Remove task from list
+        List.get(Category.selected).splice(index, 1);
+        List.show();
+        Storage.set();       
     }
-}
+};
 
 const DOM = {
     taskList: document.querySelector('.task-list'),
-    addTask(task, index) {
+
+    addTask(task, index) { // Add task into Task List
         const divContent = document.createElement('div');
         divContent.classList.add('content');
 
         divContent.innerHTML = DOM.htmlTask(task, index);
+        
         DOM.taskList.appendChild(divContent);
     },
     
     htmlTask(task, index) {
-        const html = `<label class="task">
+        const html = `<label for="task${index}" class="task" data-index="${index}">
         <div class="description-check">
             <input type="checkbox" id="task${index}">
             <span class="checkmark"></span>
@@ -124,27 +162,22 @@ const DOM = {
         <span class="time">${task.time}</span>
     </label>
 
-    <img src="./images/trash.svg" alt="Cancelar task" class="cancel" id="cancel${index}">`
-    
+    <img src="./images/trash.svg" alt="Cancelar task" class="cancel" onclick="Task.remove(${index})">`
+
         return html;
     },
 
-    checkTask(task, index) {
-        const element = document.querySelector(`#task${index}`);
+    toggleAttributeIfChecked() {
+        const list = List.get(Category.selected);
 
-        task.checked ? element.setAttribute('checked', 'true') : element.removeAttribute('checked')
-    },
+        // Check if the tasks in the list are checked
+        for(index = 0; index < list.length; index++) {
+        const input = document.querySelector(`#task${index}`);
 
-    eventCheck(task, index) {
-        const element = document.querySelector(`#task${index}`);
-
-        element.addEventListener('click', () => {
-            task.checked = !task.checked;
-            DOM.checkTask(task, index);
-            Storage.set(List.all);
-        })       
-    },
-}
+        list[index].checked ? input.setAttribute('checked', true) : input.removeAttribute('checked')
+        }
+    }
+};
 
 const Form = {
     description: document.querySelector('#description-input'),
@@ -160,23 +193,38 @@ const Form = {
         }
     },
 
-    clearFields() {
+    addInList() { // Add to the list for the category selected by user on form  
+        const {description, time, checked, category} = Form.getValues();
+
+        List.get(category).push({description, time, checked});
+        Category.selected = category;
+    },
+
+    resetFields() {
         Form.description.value = "";
         Form.time.value = "";
-        Form.category.value = "category-work";
+        Form.category.value = Category.selected;
     },
     
     submit(event) {
         event.preventDefault();
 
         try {
-            const {description, time, checked, category} = Form.getValues();
-            List.insert({description, time, checked}, category);
-            Form.clearFields()
-            Modal.toggle();
-
+            Form.addInList();
+            Form.resetFields();
+            Modal.toggle(); 
+            Category.addClassActive();
+            List.show();            
         } catch(error) {
             alert(error.message)
         }
     }    
-}
+};
+
+const App = {
+    init() {
+        Category.addEvent()  
+    }    
+};
+
+App.init();

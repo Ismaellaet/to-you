@@ -16,6 +16,11 @@ header h1 {
     width: 6rem;
 }
 
+.category img:hover {
+    background-color: var(--border);
+    border-radius: 2rem;
+}
+
 .category p {
     font-size: 2rem;
 }
