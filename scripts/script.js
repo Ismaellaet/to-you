@@ -89,8 +89,6 @@ const List = {
 
         DOM.toggleAttributeIfChecked();
 
-        Task.addEvent(); 
-
         Storage.set();
     },
 
@@ -108,7 +106,7 @@ const Task = {
         }
     },
 
-    addEvent() { // Add event to each task
+    addEvent() { // Add event listener to toggle the checked property for each task
         for(const task of Task.collection) {
             task.addEventListener('change', () => {
                 Task.toggleCheckedProperty(task);
@@ -150,7 +148,7 @@ const DOM = {
         DOM.taskList.appendChild(divContent);
     },
     
-    htmlTask(task, index) {
+    htmlTask(task, index) { // Return the task in HTML format
         const html = `<label for="task${index}" class="task" data-index="${index}">
         <div class="description-check">
             <input type="checkbox" id="task${index}">
